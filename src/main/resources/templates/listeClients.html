@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Clients</title>
+</head>
+<body>
+    <h1>Liste des Clients</h1>
+    <table id="clientsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        fetch('/client/lister')
+            .then(response => response.json())
+            .then(data => {
+                const clientsTable = document.getElementById('clientsTable');
+                const tbody = clientsTable.querySelector('tbody');
+                tbody.innerHTML = ''; // Efface les données existantes
+
+                data.forEach(client => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${client.id}</td>
+                        <td>${client.nom}</td>
+                        <td>${client.prenom}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            })
+            .catch(error => console.error('Une erreur est survenue:', error));
+    </script>
+</body>
+</html>

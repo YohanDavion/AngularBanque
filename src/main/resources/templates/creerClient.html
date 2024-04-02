@@ -1,16 +1,47 @@
-<html xmlns:th="http://thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>Client création</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Client</title>
 </head>
 <body>
-<div>
-	<h1>création de client</h1>
-	<form action="#" th:action="@{/client/creer}" th:object="${client}" method="post">
-		<p>nom: <input type="text" th:field="*{nom}" /></p>
-		<p>prenom: <input type="text" th:field="*{prenom}" /></p>
-		<p><input type="submit" value="Valider" /> <input type="reset" value="Annuler" /></p>
-	</form>
-</div>
+    <h1>Créer un Client</h1>
+    <form id="creerClientForm">
+        <label for="nom">Nom:</label>
+        <input type="text" id="nom" name="nom"><br><br>
+        <label for="prenom">Prénom:</label>
+        <input type="text" id="prenom" name="prenom"><br><br>
+        <button type="submit">Créer</button>
+    </form>
+
+    <script>
+        document.getElementById('creerClientForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const nom = document.getElementById('nom').value;
+            const prenom = document.getElementById('prenom').value;
+            
+            fetch('/client/creer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nom: nom, prenom: prenom })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la création du client');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Client créé avec succès');
+                // Redirection vers la liste des clients ou toute autre page appropriée
+                window.location.href = 'listeClients.html';
+            })
+            .catch(error => console.error('Une erreur est survenue:', error));
+        });
+    </script>
 </body>
 </html>
