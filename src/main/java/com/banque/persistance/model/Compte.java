@@ -6,35 +6,50 @@ import jakarta.persistence.*;
 @Table(name="compte")
 public class Compte {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Column(name="numero",length=50)
-	private String numero;
-	
-	@ManyToOne
-	@JoinColumn(name="idClient")
-	private Client client;
-	
-	@Override
-	public String toString() {
-		return "Compte [id=" + id + ", numero=" + numero;
-	}
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
+    
+    @Column(name="numero",length=50)
+    private String numero;
+    
+    @ManyToOne
+    @JoinColumn(name="idClient")
+    private Client client;
+    
+    @Column(name="solde")
+    private double solde;
 
-	public String getNumero() {
-		return numero;
-	}
+    // Getters et Setters
+    public Integer getId() {
+        return id;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public double getSolde() {
+        return solde;
+    }
+
+    public void setSolde(double solde) {
+        this.solde = solde;
+    }
 }
