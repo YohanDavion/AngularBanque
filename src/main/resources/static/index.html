@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<a href="/" class="retour-accueil">Retour à l'accueil</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Controleur</th>
+                <th>Page</th>
+                <th>Liens</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Comptes controleur</td>
+                <td>Accès comptes</td>
+                <td><a href="compte/lister">Liste des comptes</a></td>
+            </tr>
+            <tr>
+                <td>Clients controleur</td>
+                <td>Accès clients</td>
+                <td><a href="client/lister">Liste des clients</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <p><a th:href="@{'/virement'}" class="lien-virement">Faire un virement</a></p>
+</body>
+</html>
