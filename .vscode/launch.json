@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BanquePersistanceApplication<tp_banque>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.banque.persistance.BanquePersistanceApplication",
+            "projectName": "tp_banque",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Compte</title>
+</head>
+<body>
+    <h1>Créer un Compte</h1>
+    <form id="creerCompteForm">
+        <label for="numero">Numéro de Compte:</label>
+        <input type="text" id="numero" name="numero"><br><br>
+        <label for="solde">Solde:</label>
+        <input type="text" id="solde" name="solde"><br><br>
+        <label for="idClient">ID du Client:</label>
+        <input type="text" id="idClient" name="idClient"><br><br>
+        <button type="submit">Créer</button>
+    </form>
+
+    <script>
+        document.getElementById('creerCompteForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const numero = document.getElementById('numero').value;
+            const solde = document.getElementById('solde').value;
+            const idClient = document.getElementById('idClient').value;
+            
+            fetch('/compte/creer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ numero: numero, solde: solde, client: { id: idClient } })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la création du compte');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Compte créé avec succès');
+                // Redirection vers la liste des comptes ou toute autre page appropriée
+                window.location.href = 'listeComptes.html';
+            })
+            .catch(error => console.error('Une erreur est survenue:', error));
+        });
+    </script>
+</body>
+</html>

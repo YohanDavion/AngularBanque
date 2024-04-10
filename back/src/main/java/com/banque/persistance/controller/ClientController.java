@@ -4,25 +4,27 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.banque.persistance.model.Client;
 import com.banque.persistance.service.ClientService;
 
-
-
 @RestController
+@RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 	
 	@Autowired
 	private ClientService clientService;
 	
-	@GetMapping("/client/lister")
+	@GetMapping("/client/liste")
 	public ModelAndView listeClients() {
 		return new ModelAndView("listeClients","clients",clientService.getClient());
 	}

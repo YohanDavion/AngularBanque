@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true
+            },
+            "previewLimit": 50,
+            "server": "banque.database.windows.net",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "DB_Banque",
+            "database": "banque_angular",
+            "username": "yohan.davion",
+            "password": "THOMAS666vk"
+        }
+    ]
+}
