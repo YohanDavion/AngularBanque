@@ -12,29 +12,29 @@ public class Client {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="nom",length=50)
-	private String nom;
+	@Column(name="lastName",length=50)
+	private String lastName;
 	
-	@Column(name="prenom",length=50)
-	private String prenom;
+	@Column(name="firstName",length=50)
+	private String firstName;
 	
 	@OneToMany(mappedBy="client")
 	private List<Compte> comptes = new ArrayList<>();
 
-	public String getNom() {
-		return nom;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getPrenom() {
-		return prenom;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public Integer getId() {

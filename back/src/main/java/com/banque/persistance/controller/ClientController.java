@@ -1,5 +1,6 @@
 package com.banque.persistance.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,36 +19,26 @@ import com.banque.persistance.model.Client;
 import com.banque.persistance.service.ClientService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/clients")
 @CrossOrigin(origins = "http://localhost:4200")
 public class ClientController {
 	
 	@Autowired
 	private ClientService clientService;
-	
-	@GetMapping("/client/liste")
-	public ModelAndView listeClients() {
-		return new ModelAndView("listeClients","clients",clientService.getClient());
-	}
 
-	@GetMapping("/client/lister/{id}")
+	@GetMapping("/liste")
+    public Iterable<Client> getAllClients() {
+        return clientService.getAllClients();
+    }
+
+	/*@GetMapping("/lister/{id}")
 	public ModelAndView detailClient(@PathVariable("id") final Integer id) {
 		Optional<Client> client = clientService.getClient(id);
 		return new ModelAndView("detailClient","client",client.orElse(null));
-	}
-	
-	@GetMapping("/client/creer")
-	public ModelAndView creerClient() {
-		Client c= new Client();
-		return new ModelAndView("creerClient","client",c);
-	}
-	
-	@PostMapping("/client/creer")
-	public ModelAndView submit(@ModelAttribute("client") Client client, ModelMap model) {
-		model.addAttribute("nom",client.getNom());
-		model.addAttribute("prenom",client.getPrenom());
-		System.out.print("CREER");
-		clientService.saveClient(client);
-		return listeClients();
+	}*/
+
+	@PostMapping("/creer")
+	public Client creerClient(@RequestBody Client client) {
+		return clientService.saveClient(client);
 	}
 }

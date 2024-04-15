@@ -1,5 +1,6 @@
 package com.banque.persistance.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,11 @@ public class ClientService {
 	public Optional<Client> getClient(final Integer id){
 		return clientRepository.findById(id);
 	}
-	
+
+    public Iterable<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
+
 	public Iterable<Client> getClient(){
 		return clientRepository.findAll();
 	}
