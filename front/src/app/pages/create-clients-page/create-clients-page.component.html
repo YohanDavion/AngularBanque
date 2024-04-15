@@ -1,0 +1,22 @@
+<app-nav-bar></app-nav-bar>
+<h1>Création Client :</h1>
+<p-card styleClass="user-form" class="flex justify-content-center">
+  <form [formGroup]="userForm" (ngSubmit)="addUser()" novalidate>
+    <div class="field inputForm">
+      <label for="firstName" class="block">Prénom : </label>
+      <input type="text" style="margin-left: 20px;" pInputText placeholder="Prénom" formControlName="firstName" />
+      <small class="p-error block" *ngIf="
+          userForm.get('firstName')?.invalid && userForm.get('firstName')?.dirty">
+        Le Prénom est obligatoire !</small>
+    </div>
+    <div class="field inputForm">
+      <label for="lastName" class="block">Nom : </label>
+      <input type="text" style="margin-left: 43px;" pInputText placeholder="Nom" formControlName="lastName" />
+      <small class="p-error block" *ngIf="
+          userForm.get('lastName')?.invalid && userForm.get('lastName')?.dirty">
+        Le Nom est obligatoire !</small>
+    </div>
+    <p-toast></p-toast>
+    <button pButton pRipple class="p-button-success inputForm" type="submit" label="Créer" [disabled]="userForm.invalid"></button>
+  </form>
+</p-card>
