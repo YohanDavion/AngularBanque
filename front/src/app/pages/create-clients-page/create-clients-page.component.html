@@ -3,17 +3,17 @@
 <p-card styleClass="user-form" class="flex justify-content-center">
   <form [formGroup]="userForm" (ngSubmit)="addUser()" novalidate>
     <div class="field inputForm">
-      <label for="firstName" class="block">Prénom : </label>
-      <input type="text" style="margin-left: 20px;" pInputText placeholder="Prénom" formControlName="firstName" />
+      <label for="firstname" class="block">Prénom : </label>
+      <input type="text" style="margin-left: 20px;" pInputText placeholder="Prénom" formControlName="firstname" />
       <small class="p-error block" *ngIf="
-          userForm.get('firstName')?.invalid && userForm.get('firstName')?.dirty">
+          userForm.get('firstname')?.invalid && userForm.get('firstname')?.dirty">
         Le Prénom est obligatoire !</small>
     </div>
     <div class="field inputForm">
-      <label for="lastName" class="block">Nom : </label>
-      <input type="text" style="margin-left: 43px;" pInputText placeholder="Nom" formControlName="lastName" />
+      <label for="lastname" class="block">Nom : </label>
+      <input type="text" style="margin-left: 43px;" pInputText placeholder="Nom" formControlName="lastname" />
       <small class="p-error block" *ngIf="
-          userForm.get('lastName')?.invalid && userForm.get('lastName')?.dirty">
+          userForm.get('lastname')?.invalid && userForm.get('lastname')?.dirty">
         Le Nom est obligatoire !</small>
     </div>
     <p-toast></p-toast>

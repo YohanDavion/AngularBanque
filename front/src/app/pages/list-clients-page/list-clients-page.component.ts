@@ -6,6 +6,7 @@ import { TableModule } from 'primeng/table';
 import { NavBarComponent } from 'src/app/composants/nav-bar/nav-bar.component';
 import { BanqueService } from 'src/app/services/banque.service';
 import { Router } from '@angular/router';
+import { ClientModel } from 'src/app/models/client-model';
 
 @Component({
   selector: 'app-list-clients-page',
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
   styleUrl: './list-clients-page.component.scss'
 })
 export class ListClientsPageComponent {
-  clients: any[] = [];
+  clients: ClientModel[] = [];
 
   constructor(private banqueService: BanqueService,private router: Router) { };
 
@@ -30,6 +31,5 @@ export class ListClientsPageComponent {
   }
 
   click(){
-
   }
 }

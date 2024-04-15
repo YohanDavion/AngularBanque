@@ -8,6 +8,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common'; 
 import { BanqueService } from 'src/app/services/banque.service';
+import { ClientModel } from 'src/app/models/client-model';
 
 @Component({
   selector: 'app-create-clients-page',
@@ -34,19 +35,24 @@ export class CreateClientsPageComponent{
   ) { };
 
   userForm = this.fb.group({
-    firstName: ['',Validators.required], 
-    lastName: ['',Validators.required],
+    firstname: ['',Validators.required], 
+    lastname: ['',Validators.required],
   });
 
   addUser() {
-    this.banqueService.createClient(this.userForm.value).subscribe({
+      const newUser: ClientModel = {
+        firstname: this.userForm.value.firstname as string,
+        lastname: this.userForm.value.lastname as string,
+        id: 0
+      };
+    this.banqueService.createClient(newUser).subscribe({
       next: response => {
         this.showSuccess();
       },
       error: error => {
         this.showError();
       }
-  });
+    });
     this.userForm.reset();
   }
 
