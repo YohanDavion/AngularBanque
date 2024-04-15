@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MenubarModule } from 'primeng/menubar';
 import { NavBarComponent } from './composants/nav-bar/nav-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NavBarComponent } from './composants/nav-bar/nav-bar.component';
     AppRoutingModule,
     HttpClientModule,
     MenubarModule,
-    NavBarComponent
+    NavBarComponent,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
