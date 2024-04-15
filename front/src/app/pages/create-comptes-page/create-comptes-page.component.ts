@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { NavBarComponent } from 'src/app/composants/nav-bar/nav-bar.component';
 import { BanqueService } from 'src/app/services/banque.service';
 import { DropdownModule } from 'primeng/dropdown';
+import { ClientModel } from 'src/app/models/client-model';
 
 @Component({
   selector: 'app-create-comptes-page',
@@ -18,7 +18,6 @@ import { DropdownModule } from 'primeng/dropdown';
     ToastModule,
     CommonModule,
     ButtonModule,
-    CardModule,
     FormsModule,
     ReactiveFormsModule,
     DropdownModule
@@ -32,19 +31,19 @@ export class CreateComptesPageComponent {
     private banqueService: BanqueService
   ) { };
 
-  clients: any[] = [];
-  selectedClient: any;
-
-  compteForm = this.fb.group({
-  });
+  clients: ClientModel[] = [];
+  selectedClient: ClientModel | undefined;
 
   ngOnInit(): void {
     this.banqueService.getAllClients().subscribe(data => {
-      this.clients = data;
+      this.clients = data.map((client: ClientModel) => ({
+        ...client,
+        name: client.firstname + ' ' + client.lastname,
+      }));
     });
   }
 
-  addCompte(){
+  addCompte() {
   }
 
 }

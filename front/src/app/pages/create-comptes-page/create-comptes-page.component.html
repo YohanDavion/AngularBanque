@@ -1,22 +1,16 @@
 <app-nav-bar></app-nav-bar>
 <h1>Création Compte Client :</h1>
-<p-card styleClass="compte-Form" class="flex justify-content-center">
-  <form [formGroup]="compteForm" (ngSubmit)="addCompte()" novalidate>
-    <p-dropdown [options]="clients" [(ngModel)]="selectedClient" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Country">
+
+    <p-dropdown [options]="clients" [(ngModel)]="selectedClient" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Client">
         <ng-template pTemplate="selectedItem" let-selectedOption>
             <div class="flex align-items-center gap-2">
-                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-' + selectedClient.code.toLowerCase()" style="width: 18px"/>
-                <div>{{ selectedOption.name }}</div>
+                <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
             </div>
         </ng-template>
         <ng-template let-client pTemplate="item">
             <div class="flex align-items-center gap-2">
-                <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'flag flag-'" style="width: 18px"/>
-                <div>{{ client.firstName }}</div>
+                <div>{{ client?.firstname + ' ' + client?.lastname }}</div>
             </div>
         </ng-template>
     </p-dropdown>
-    <p-toast></p-toast>
-    <button pButton pRipple class="p-button-success inputForm" type="submit" label="Créer" [disabled]="compteForm.invalid"></button>
-  </form>
-</p-card>
+    
