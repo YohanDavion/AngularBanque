@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { BanqueService } from '../services/banque.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +7,4 @@ import { BanqueService } from '../services/banque.service';
 })
 
 export class HomeComponent {
-  
-  valueClient: any;
-
-  constructor(private banqueService: BanqueService) { }
-
-  
 }
