@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [MenubarModule],
+  imports: [MenubarModule,ButtonModule],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
 })
@@ -14,13 +15,28 @@ export class NavBarComponent {
   ngOnInit(): void {
     this.items = [ 
       { 
+        label: 'Accueil', 
+        routerLink: ['/accueil'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
+      },
+      { 
           label: 'Clients', 
           items: [ 
             { 
-                label: 'Créer un Client'
+                label: 'Créer un Client',
+                routerLink: ['/clients/creer'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
             }, 
             { 
-                label: 'Liste des Clients'
+                label: 'Liste des Clients',
+                routerLink: ['/clients/liste'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
             } 
           ] 
       }, 
@@ -29,7 +45,11 @@ export class NavBarComponent {
 
           items: [ 
             { 
-                label: 'Créer un Compte'
+                label: 'Créer un Compte',
+                routerLink: ['/comptes/creer'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
             }, 
             { 
                 label: 'Liste des Comptes'
