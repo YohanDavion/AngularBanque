@@ -10,15 +10,18 @@ public class Compte {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(name="numero",length=50)
-    private String numero;
+    @Column(name="numero", length = 20)
+    private Long numero;
     
+    @Column(name="accountName")
+    private String accountName;
+
     @ManyToOne
     @JoinColumn(name="idClient")
     private Client client;
     
-    @Column(name="solde")
-    private double solde;
+    @Column(name="balance")
+    private double balance;
 
     // Getters et Setters
     public Integer getId() {
@@ -29,11 +32,11 @@ public class Compte {
         this.id = id;
     }
 
-    public String getNumero() {
+    public Long getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Long numero) {
         this.numero = numero;
     }
 
@@ -45,11 +48,19 @@ public class Compte {
         this.client = client;
     }
 
-    public double getSolde() {
-        return solde;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setSolde(double solde) {
-        this.solde = solde;
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }

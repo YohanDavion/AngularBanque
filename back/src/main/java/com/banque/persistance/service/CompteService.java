@@ -1,5 +1,6 @@
 package com.banque.persistance.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class CompteService {
 	@Autowired
 	private CompteRepository compteRepository;
 	
-	public Optional<Compte> getCompte(final Integer id){
-		return compteRepository.findById(id);
+	public List<Compte> getCompte(final Integer id){
+		return compteRepository.findByClientId(id);
 	}
 	
 	public Iterable<Compte> getComptes(){

@@ -30,13 +30,7 @@ public class ClientController {
     public Iterable<Client> getAllClients() {
         return clientService.getAllClients();
     }
-
-	/*@GetMapping("/lister/{id}")
-	public ModelAndView detailClient(@PathVariable("id") final Integer id) {
-		Optional<Client> client = clientService.getClient(id);
-		return new ModelAndView("detailClient","client",client.orElse(null));
-	}*/
-
+	
 	@PostMapping("/creer")
 	public Client creerClient(@RequestBody Client client) {
 		return clientService.saveClient(client);
