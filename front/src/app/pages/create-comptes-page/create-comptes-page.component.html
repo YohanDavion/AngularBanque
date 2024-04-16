@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <h1>Création Compte Client :</h1>
-
-    <p-dropdown [options]="clients" [(ngModel)]="selectedClient" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Client">
+<p-card styleClass="user-form" class="flex justify-content-center">
+    <p-dropdown [options]="clients" [(ngModel)]="selectedClient" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
         <ng-template pTemplate="selectedItem" let-selectedOption>
             <div class="flex align-items-center gap-2">
                 <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
@@ -13,4 +13,12 @@
             </div>
         </ng-template>
     </p-dropdown>
-    
+
+    <label for="accountName" class="block">Nom de Compte : </label>
+    <input pInputText placeholder="Compte" [(ngModel)]="accountName" />
+    <label for="balance" class="block">Solde : </label>
+    <input pInputText pKeyFilter="int" placeholder="0" [(ngModel)]="balance" />
+    <p-toast></p-toast>
+    <p-button severity="success" (onClick)="addCompte()" label="Créer" [disabled]="!isFormValid()"></p-button>
+    <p-button severity="warning" (onClick)="clear()" label="Reset"></p-button>
+</p-card>

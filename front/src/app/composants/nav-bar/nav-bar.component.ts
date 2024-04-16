@@ -52,7 +52,11 @@ export class NavBarComponent {
                 }
             }, 
             { 
-                label: 'Liste des Comptes'
+                label: 'Liste des Comptes',
+                routerLink: ['/comptes/liste'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
             } 
           ] 
       },
