@@ -12,15 +12,19 @@ export class BanqueService {
 
   constructor(private http: HttpClient) { }
 
-  /*getClientList(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/client/liste`);
-  }*/
-
   createClient(formData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/clients/creer`, formData);
   }
 
+  createCompte(formData: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/comptes/creer`, formData);
+  }
+
   getAllClients(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/clients/liste`);
+  }
+
+  getCompte(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/comptes/liste/${id}`);
   }
 }
