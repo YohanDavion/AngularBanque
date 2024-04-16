@@ -1,0 +1,38 @@
+<app-nav-bar></app-nav-bar>
+<h1>Liste des Comptes :</h1>
+<p-card styleClass="user-form" class="flex justify-content-center">
+<p-dropdown [options]="clients" [(ngModel)]="selectedClient" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+    <ng-template pTemplate="selectedItem" let-selectedOption>
+        <div class="flex align-items-center gap-2">
+            <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
+        </div>
+    </ng-template>
+    <ng-template let-client pTemplate="item">
+        <div class="flex align-items-center gap-2">
+            <div>{{ client?.firstname + ' ' + client?.lastname }}</div>
+        </div>
+    </ng-template>
+</p-dropdown>
+<button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="click()"></button>
+</p-card>
+
+<p-card styleClass="user-form" class="flex justify-content-center">
+<p-table [value]="comptes" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ID</th>
+            <th>Numéro</th>
+            <th>Nom</th>
+            <th>Solde</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-compte>
+        <tr>
+            <td>{{ compte.id }}</td>
+            <td>{{ compte.numero }}</td>
+            <td>{{ compte.accountName }}</td>
+            <td>{{ compte.balance }}</td>
+        </tr>
+    </ng-template>
+</p-table>
+</p-card>
