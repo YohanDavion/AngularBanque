@@ -24,7 +24,7 @@
             <td>{{client.firstname}}</td>
             <td>{{client.lastname}}</td>
             <td>
-                <button type="button" style="margin-right: 15px;" pButton icon="pi pi-user" (click)="click()"></button>
+                <button type="button" style="margin-right: 15px;" pButton icon="pi pi-user" (click)="goToDetail('detail/client',client)"></button>
                 <button type="button" style="margin-right: 15px;" severity="danger" pButton icon="pi pi-trash" (click)="click()"></button>
             </td>
         </tr>

@@ -30,6 +30,10 @@ export class ListClientsPageComponent {
     this.router.navigate([`${pageName}`]);
   }
 
+  goToDetail(pageName:string,client:ClientModel){
+    this.router.navigate(['detail/client'],{state:{client}});
+  }
+
   click(){
   }
 }

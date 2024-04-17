@@ -5,6 +5,7 @@ import { ListClientsPageComponent } from './pages/list-clients-page/list-clients
 import { CreateClientsPageComponent } from './pages/create-clients-page/create-clients-page.component';
 import { CreateComptesPageComponent } from './pages/create-comptes-page/create-comptes-page.component';
 import { ListComptesPageComponent } from './pages/list-comptes-page/list-comptes-page.component';
+import { DetailClientPageComponent } from './pages/detail-client-page/detail-client-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'clients/liste', component: ListClientsPageComponent },
   { path: 'comptes/liste', component: ListComptesPageComponent },
   { path: 'clients/creer', component: CreateClientsPageComponent },
-  { path: 'comptes/creer', component: CreateComptesPageComponent }
+  { path: 'comptes/creer', component: CreateComptesPageComponent },
+  { path: 'detail/client', component: DetailClientPageComponent }
 ];
 
 @NgModule({
