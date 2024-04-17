@@ -25,7 +25,6 @@ import { CardModule } from 'primeng/card';
 export class ListComptesPageComponent {
   clients: ClientModel[] = [];
   selectedClient: ClientModel | undefined;
-
   comptes: CompteModel[] = [];
 
   constructor(private banqueService: BanqueService) {};
@@ -38,14 +37,11 @@ export class ListComptesPageComponent {
       }));
     });
   }
-  click(){
-    console.log("click");
+  getCompte(){
     if(this.selectedClient){
-      console.log("get");
       this.banqueService.getCompte(this.selectedClient.id).subscribe(data => {
         this.comptes = data;
       });
-      console.log(this.comptes);
     }
   }
 }
