@@ -1,0 +1,70 @@
+<app-nav-bar></app-nav-bar>
+<h1>Execution d'un Virement :</h1>
+<p-card styleClass="user-form" class="flex justify-content-center">
+    <div>
+    <p-tag icon="pi pi-user" value="Initiateur"></p-tag>
+    <label class="block">Client : </label>
+    <p-dropdown [options]="clients" emptyFilterMessage="Aucun client trouvé" (onChange)="getCompteInitiator()" [(ngModel)]="selectedClientInitiator" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-client pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ client?.firstname + ' ' + client?.lastname }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    <label class="block">Compte : </label>
+    <p-dropdown [options]="comptesInitiator" emptyMessage="Aucun client selectionné" emptyFilterMessage="Aucun compte trouvé" [(ngModel)]="selectedCompteInitiator" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Compte">
+        <ng-template pTemplate="selectedItem" let-compte>
+            <div class="flex align-items-center gap-2">
+                <div>{{ compte?.accountName }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-compte pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ compte?.accountName }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    </div>
+    <div style="margin-top: 10px;">
+    <p-tag icon="pi pi-user" severity="success" value="Destinataire"></p-tag>
+    <label class="block">Client : </label>
+    <p-dropdown [options]="clients" emptyFilterMessage="Aucun client trouvé" (onChange)="getCompteDestinator()" [(ngModel)]="selectedClientDestinator" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+        <ng-template pTemplate="selectedItem" let-selectedOption>
+            <div class="flex align-items-center gap-2">
+                <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-client pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ client?.firstname + ' ' + client?.lastname }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+    <label class="block">Compte : </label>
+    <p-dropdown [options]="comptesDestinator" emptyMessage="Aucun client selectionné" emptyFilterMessage="Aucun compte trouvé" [(ngModel)]="selectedCompteDestinator" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Compte">
+        <ng-template pTemplate="selectedItem" let-compte>
+            <div class="flex align-items-center gap-2">
+                <div>{{ compte?.accountName }}</div>
+            </div>
+        </ng-template>
+        <ng-template let-compte pTemplate="item">
+            <div class="flex align-items-center gap-2">
+                <div>{{ compte?.accountName }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+</div>
+<div style="margin-top: 20px;">
+    <p-tag icon="pi pi-euro" severity="warning" value="Solde"></p-tag>
+    <label class="block">Montant : </label>
+    <input pInputText pKeyFilter="int" placeholder="0" [(ngModel)]="balance" />
+</div>
+<div style="margin-top: 20px;margin-left: 20px;">
+<p-button severity="success" (onClick)="addVirement()" label="Executer"></p-button>
+</div>
+</p-card>
