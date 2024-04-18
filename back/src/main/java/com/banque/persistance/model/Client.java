@@ -24,7 +24,7 @@ public class Client {
 	@CreationTimestamp
     @Column(name = "creation_date")
     private Date creationDate;
-	
+
 	@OneToMany(mappedBy="client")
 	private List<Compte> comptes = new ArrayList<>();
 
@@ -50,5 +50,13 @@ public class Client {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 }

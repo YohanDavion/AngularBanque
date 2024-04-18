@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.banque.persistance.model.Client;
 import com.banque.persistance.repository.ClientRepository;
+import com.banque.persistance.repository.CompteRepository;
 
 import lombok.Data;
 
@@ -17,6 +18,8 @@ public class ClientService {
 
 	@Autowired
 	private ClientRepository clientRepository;
+	@Autowired
+	private CompteRepository compteRepository;
 	
 	public Optional<Client> getClient(final Integer id){
 		return clientRepository.findById(id);
@@ -31,6 +34,7 @@ public class ClientService {
 	}
 		
 	public void deleteClient(final Integer id) {
+		compteRepository.deleteByClientId(id);
 		clientRepository.deleteById(id);
 	}
 	
