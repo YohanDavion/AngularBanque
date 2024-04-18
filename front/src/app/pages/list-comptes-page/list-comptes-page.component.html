@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <h1>Liste des Comptes :</h1>
 <p-card styleClass="user-form" class="flex justify-content-center">
-<p-dropdown [options]="clients" [(ngModel)]="selectedClient" [filter]="true" (onChange)="getCompte()" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+<p-dropdown [options]="clients" emptyFilterMessage="Aucun client trouvé" [(ngModel)]="selectedClient" [filter]="true" (onChange)="getCompte()" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
     <ng-template pTemplate="selectedItem" let-selectedOption>
         <div class="flex align-items-center gap-2">
             <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
@@ -23,6 +23,7 @@
             <th>Numéro</th>
             <th>Nom</th>
             <th>Solde</th>
+            <th>Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-compte>
@@ -31,7 +32,12 @@
             <td>{{ compte.numero }}</td>
             <td>{{ compte.accountName }}</td>
             <td>{{ compte.balance }}</td>
+            <td>
+                <button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="click()"></button>
+                <button type="button" style="margin-right: 15px;" severity="danger" pButton icon="pi pi-trash" (click)="deleteCompte(compte)"></button>
+            </td>
         </tr>
     </ng-template>
 </p-table>
+<p-toast></p-toast>
 </p-card>

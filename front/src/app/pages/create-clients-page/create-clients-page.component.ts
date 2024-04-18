@@ -43,7 +43,8 @@ export class CreateClientsPageComponent{
       const newUser: ClientModel = {
         firstname: this.userForm.value.firstname as string,
         lastname: this.userForm.value.lastname as string,
-        id: 0
+        id: 0,
+        creationDate: 0 as unknown as Date,
       };
     this.banqueService.createClient(newUser).subscribe({
       next: response => {

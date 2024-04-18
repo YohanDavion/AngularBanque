@@ -7,23 +7,27 @@ import { NavBarComponent } from 'src/app/composants/nav-bar/nav-bar.component';
 import { BanqueService } from 'src/app/services/banque.service';
 import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/client-model';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-list-clients-page',
   standalone: true,
-  imports: [NavBarComponent,CommonModule,TableModule,ButtonModule],
+  providers: [MessageService],
+  imports: [NavBarComponent,CommonModule,TableModule,ButtonModule,ToastModule],
   templateUrl: './list-clients-page.component.html',
   styleUrl: './list-clients-page.component.scss'
 })
 export class ListClientsPageComponent {
   clients: ClientModel[] = [];
 
-  constructor(private banqueService: BanqueService,private router: Router) { };
+  constructor(
+    private banqueService: BanqueService,
+    private router: Router,
+    private messageService: MessageService) { };
 
   ngOnInit(): void {
-    this.banqueService.getAllClients().subscribe(data => {
-      this.clients = data;
-    });
+    this.getClient();
   }
 
   goToPage(pageName:string){
@@ -34,6 +38,28 @@ export class ListClientsPageComponent {
     this.router.navigate(['detail/client'],{state:{client}});
   }
 
-  click(){
+  deleteClient(client: ClientModel){
+    this.banqueService.deleteClient(client.id).subscribe({
+      next: response => {
+        this.showSuccess();
+      },
+      error: error => {
+        this.showError();
+      }
+    });
   }
+
+  getClient(){
+    this.banqueService.getAllClients().subscribe(data => {
+      this.clients = data;
+    });
+  }
+
+  showSuccess() {
+    this.getClient();
+    this.messageService.add({ severity: 'success', summary: 'Succés', detail: 'Suppréssion du Client' });
+  }
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Echec de la suppréssion du Client' });
+}
 }

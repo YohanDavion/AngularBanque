@@ -8,17 +8,21 @@ import { CompteModel } from 'src/app/models/compte-model';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-list-comptes-page',
   standalone: true,
+  providers: [MessageService],
   imports: [
     TableModule,
     DropdownModule,
     ButtonModule,
     FormsModule,
     CardModule,
-    NavBarComponent],
+    NavBarComponent,
+    ToastModule],
   templateUrl: './list-comptes-page.component.html',
   styleUrl: './list-comptes-page.component.scss'
 })
@@ -27,7 +31,9 @@ export class ListComptesPageComponent {
   selectedClient: ClientModel | undefined;
   comptes: CompteModel[] = [];
 
-  constructor(private banqueService: BanqueService) {};
+  constructor(private banqueService: BanqueService,
+    private messageService: MessageService
+  ) {};
 
   ngOnInit() {
     this.banqueService.getAllClients().subscribe(data => {
@@ -38,10 +44,33 @@ export class ListComptesPageComponent {
     });
   }
   getCompte(){
+    this.comptes = [];
     if(this.selectedClient){
       this.banqueService.getCompte(this.selectedClient.id).subscribe(data => {
         this.comptes = data;
       });
     }
+  }
+
+  deleteCompte(compte: CompteModel){
+    this.banqueService.deleteCompte(compte.id).subscribe({
+      next: response => {
+        this.showSuccess();
+      },
+      error: error => {
+        this.showError();
+      }
+    });
+  }
+
+  showSuccess() {
+    this.getCompte();
+    this.messageService.add({ severity: 'success', summary: 'Succés', detail: 'Suppréssion du Compte' });
+  }
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Echec de la suppréssion du Compte' });
+}
+  click(){
+    
   }
 }
