@@ -6,6 +6,7 @@ import { CreateClientsPageComponent } from './pages/create-clients-page/create-c
 import { CreateComptesPageComponent } from './pages/create-comptes-page/create-comptes-page.component';
 import { ListComptesPageComponent } from './pages/list-comptes-page/list-comptes-page.component';
 import { DetailClientPageComponent } from './pages/detail-client-page/detail-client-page.component';
+import { CreateVirementsPageComponent } from './pages/create-virements-page/create-virements-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'comptes/liste', component: ListComptesPageComponent },
   { path: 'clients/creer', component: CreateClientsPageComponent },
   { path: 'comptes/creer', component: CreateComptesPageComponent },
+  { path: 'virements/creer', component: CreateVirementsPageComponent },
   { path: 'detail/client', component: DetailClientPageComponent }
 ];
 

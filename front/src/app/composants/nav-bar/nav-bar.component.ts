@@ -65,7 +65,11 @@ export class NavBarComponent {
 
         items: [ 
           { 
-              label: 'Faire un Virement'
+              label: 'Faire un Virement',
+              routerLink: ['/virements/creer'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
           }, 
           { 
               label: 'Historique des Virements'
