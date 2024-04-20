@@ -10,10 +10,14 @@ import { TagModule } from 'primeng/tag';
 import { CompteModel } from 'src/app/models/compte-model';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { VirementModel } from 'src/app/models/virement-model';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-create-virements-page',
   standalone: true,
+  providers: [MessageService],
   imports: [
     NavBarComponent,
     CommonModule,
@@ -22,22 +26,27 @@ import { ButtonModule } from 'primeng/button';
     FormsModule,
     TagModule,
     InputTextModule,
-    ButtonModule],
+    ButtonModule,
+    ToastModule],
   templateUrl: './create-virements-page.component.html',
   styleUrl: './create-virements-page.component.scss'
 })
 export class CreateVirementsPageComponent {
-  constructor(private banqueService: BanqueService) { };
-  balance: number | undefined;
+  constructor(private banqueService: BanqueService,
+    private messageService: MessageService) { };
+  virement!: VirementModel;
+
+  balance?: number;
   clients: ClientModel[] = [];
 
-  comptesInitiator: CompteModel[] = [];
-  selectedClientInitiator: ClientModel | undefined;
-  selectedCompteInitiator: CompteModel | undefined;
+  comptesEmetteur: CompteModel[] = [];
+  selectedClientEmetteur?: ClientModel;
+  selectedCompteEmetteur?: CompteModel;
 
   comptesDestinator: CompteModel[] = [];
-  selectedClientDestinator: ClientModel | undefined;
-  selectedCompteDestinator: CompteModel | undefined;
+  selectedClientDestinator?: ClientModel;
+  selectedCompteDestinator?: CompteModel;
+
   ngOnInit(): void {
     this.banqueService.getAllClients().subscribe(data => {
       this.clients = data.map((client: ClientModel) => ({
@@ -47,11 +56,11 @@ export class CreateVirementsPageComponent {
     });
   }
 
-  getCompteInitiator(){
-    this.selectedCompteInitiator = undefined;
-    if(this.selectedClientInitiator){
-      this.banqueService.getCompte(this.selectedClientInitiator.id).subscribe(data => {
-        this.comptesInitiator = data;
+  getCompteEmetteur(){
+    this.selectedCompteEmetteur = undefined;
+    if(this.selectedClientEmetteur){
+      this.banqueService.getCompte(this.selectedClientEmetteur.id).subscribe(data => {
+        this.comptesEmetteur = data;
       });
     }
   }
@@ -59,18 +68,57 @@ export class CreateVirementsPageComponent {
     this.selectedCompteDestinator = undefined;
     if(this.selectedClientDestinator){
       this.banqueService.getCompte(this.selectedClientDestinator.id).subscribe(data => {
-        if(this.selectedClientInitiator?.id == this.selectedClientDestinator?.id){
+        if(this.selectedClientEmetteur?.id == this.selectedClientDestinator?.id){
           for (let compte of data) {
-            if(compte.id == this.selectedCompteInitiator?.id){
-              data = data.filter((c: CompteModel) => c.id != this.selectedCompteInitiator?.id);
+            if(compte.id == this.selectedCompteEmetteur?.id){
+              data = data.filter((c: CompteModel) => c.id != this.selectedCompteEmetteur?.id);
             }
         }
-        this.comptesDestinator = data;
       }
+      this.comptesDestinator = data;
     });
   }
 }
-  addVirement(){
 
+isFormValid(){
+    if(this.selectedClientDestinator !== undefined &&
+      this.selectedClientEmetteur !== undefined &&
+      this.selectedCompteEmetteur !== undefined &&
+      this.selectedCompteDestinator !== undefined &&
+      this.balance !== undefined &&  this.balance > 0
+    )
+      return true;
+    else
+      return false;
+}
+
+  addVirement(){
+    if(this.selectedCompteEmetteur && this.selectedCompteDestinator && this.balance){
+      this.virement = new VirementModel(0,this.selectedCompteEmetteur.id,this.selectedCompteDestinator.id,this.balance,new Date());
+      this.clearForm();
+      this.banqueService.createVirement(this.virement).subscribe({
+        next: response => {
+          this.showSuccess();
+        },
+        error: error => {
+          this.showError();
+        }
+      });
+    }
   }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Succés', detail: 'Virement effectué' });
+  }
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Echec du virement' });
+}
+
+clearForm(){
+  this.selectedClientDestinator = undefined;
+  this.selectedClientEmetteur = undefined;
+  this.selectedCompteDestinator = undefined;
+  this.selectedCompteEmetteur = undefined;
+  this.balance = undefined;
+}
 }

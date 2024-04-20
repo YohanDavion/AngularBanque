@@ -6,11 +6,15 @@ import { CardModule } from 'primeng/card';
 import { TableModule } from 'primeng/table';
 import { BanqueService } from 'src/app/services/banque.service';
 import { CompteModel } from 'src/app/models/compte-model';
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-detail-client-page',
   standalone: true,
-  imports: [NavBarComponent,CardModule,TableModule],
+  providers: [MessageService],
+  imports: [NavBarComponent,CardModule,TableModule,ButtonModule,ToastModule],
   templateUrl: './detail-client-page.component.html',
   styleUrl: './detail-client-page.component.scss'
 })
@@ -19,7 +23,7 @@ export class DetailClientPageComponent {
   selectedClient: ClientModel | undefined;
   comptes: CompteModel[] = [];
 
-  constructor(private location: Location,private banqueService: BanqueService) { }
+  constructor(private location: Location,private banqueService: BanqueService,private messageService: MessageService) { }
 
   ngOnInit() {
     const state = this.location.getState() as any;
@@ -33,5 +37,28 @@ export class DetailClientPageComponent {
         this.comptes = data;
       });
     }
+  }
+
+  deleteCompte(compte: CompteModel){
+    this.banqueService.deleteCompte(compte.id).subscribe({
+      next: response => {
+        this.showSuccess();
+      },
+      error: error => {
+        this.showError();
+      }
+    });
+  }
+
+  showSuccess() {
+    this.getCompte();
+    this.messageService.add({ severity: 'success', summary: 'Succés', detail: 'Suppréssion du Compte' });
+  }
+  showError() {
+    this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Echec de la suppréssion du Compte' });
+  }
+
+  click(){
+    
   }
 }

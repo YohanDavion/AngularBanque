@@ -16,7 +16,7 @@ import { CompteModel } from 'src/app/models/compte-model';
 @Component({
   selector: 'app-create-comptes-page',
   standalone: true,
-  providers: [MessageService,ConfirmationService],
+  providers: [MessageService],
   imports: [
     NavBarComponent,
     ToastModule,

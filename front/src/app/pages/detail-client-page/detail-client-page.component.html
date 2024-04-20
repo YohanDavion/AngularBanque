@@ -8,6 +8,7 @@
                 <th>Numéro</th>
                 <th>Nom</th>
                 <th>Solde</th>
+                <th>Actions</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-compte>
@@ -16,7 +17,12 @@
                 <td>{{ compte.numero }}</td>
                 <td>{{ compte.accountName }}</td>
                 <td>{{ compte.balance }}</td>
+                <td>
+                    <button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="click()"></button>
+                    <button type="button" style="margin-right: 15px;" severity="danger" pButton icon="pi pi-trash" (click)="deleteCompte(compte)"></button>
+                </td>
             </tr>
         </ng-template>
     </p-table>
+    <p-toast></p-toast>
 </p-card>
