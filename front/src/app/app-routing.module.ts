@@ -7,12 +7,14 @@ import { CreateComptesPageComponent } from './pages/create-comptes-page/create-c
 import { ListComptesPageComponent } from './pages/list-comptes-page/list-comptes-page.component';
 import { DetailClientPageComponent } from './pages/detail-client-page/detail-client-page.component';
 import { CreateVirementsPageComponent } from './pages/create-virements-page/create-virements-page.component';
+import { ListVirementsPageComponent } from './pages/list-virements-page/list-virements-page.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full'},
   { path: 'accueil', component: HomeComponent },
   { path: 'clients/liste', component: ListClientsPageComponent },
   { path: 'comptes/liste', component: ListComptesPageComponent },
+  { path: 'virements/liste', component: ListVirementsPageComponent },
   { path: 'clients/creer', component: CreateClientsPageComponent },
   { path: 'comptes/creer', component: CreateComptesPageComponent },
   { path: 'virements/creer', component: CreateVirementsPageComponent },
