@@ -5,11 +5,13 @@ export class VirementModel {
     idCompteEmetteur: number;
     idCompteDestinataire: number;
     montant: number;
+    date: Date;
 
-    constructor(id: number,idCompteEmetteur: number, idCompteDestinataire: number, montant: number) {
+    constructor(id: number,idCompteEmetteur: number, idCompteDestinataire: number, montant: number,date: Date) {
         this.id = id;
         this.idCompteEmetteur = idCompteEmetteur;
         this.idCompteDestinataire = idCompteDestinataire;
         this.montant = montant;
+        this.date = date;
     }
 }
