@@ -1,5 +1,7 @@
 package com.banque.persistance.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +27,16 @@ public class ClientController {
     public Iterable<Client> getAllClients() {
         return clientService.getAllClients();
     }
+
+	@GetMapping("/liste/{id}")
+    public Optional<Client> getClient(@PathVariable("id") final Integer id) {
+        return clientService.getClient(id);
+    }
+	
+	@GetMapping("/countAll")
+	public Long countAllClients() {
+		return clientService.countAllClients();
+	}
 	
 	@PostMapping("/creer")
 	public Client creerClient(@RequestBody Client client) {

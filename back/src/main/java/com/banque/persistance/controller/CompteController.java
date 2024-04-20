@@ -39,21 +39,14 @@ public class CompteController {
 	public void deleteClient(@PathVariable Integer id) {
 		compteService.deleteCompte(id);
 	}
-	/*@GetMapping("/compte/lister")
-	public ModelAndView listeComptes() {
-		return new ModelAndView("listeComptes", "comptes", compteService.getComptes());
+
+	@GetMapping("/countAll")
+	public Long countAllComptes() {
+		return compteService.countAllComptes();
 	}
-	
-	@GetMapping("/compte/creer")
-	public ModelAndView creerCompte() {
-		return new ModelAndView("creerCompte","compte",new Compte());
+
+	@GetMapping("/allBalance")
+	public Double countAllBalance() {
+		return compteService.countAllBalances();
 	}
-	
-	@PostMapping("/compte/creer")
-	public ModelAndView submit(@ModelAttribute("compte")Compte compte,ModelMap model) {
-		model.addAttribute("numero",compte.getNumero());
-		model.addAttribute("client",compte.getClient());
-		compteService.saveCompte(compte);
-		return listeComptes();
-	}*/
 }

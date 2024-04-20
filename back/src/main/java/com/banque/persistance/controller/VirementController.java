@@ -17,4 +17,14 @@ public class VirementController {
     public Virement creerVirement(@RequestBody Virement virement) {
         return virementService.saveVirement(virement);
     }
+
+    @GetMapping("/liste")
+    public Iterable<Virement> getAllVirements() {
+        return virementService.getAllVirements();
+    }
+
+    @GetMapping("/countAll")
+	public Long countAllVirements() {
+		return virementService.countAllVirements();
+	}
 }

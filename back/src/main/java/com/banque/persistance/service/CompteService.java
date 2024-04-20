@@ -1,7 +1,7 @@
 package com.banque.persistance.service;
 
+import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +31,15 @@ public class CompteService {
 	
 	public Compte saveCompte(Compte compte) {
 		return compteRepository.save(compte);
+	}
+
+	public Long countAllComptes() {
+		return compteRepository.count();
+	}
+	
+	public Double countAllBalances(){
+		return ((Collection<Compte>) compteRepository.findAll()).stream()
+			.mapToDouble(Compte::getBalance)
+			.sum();
 	}
 }

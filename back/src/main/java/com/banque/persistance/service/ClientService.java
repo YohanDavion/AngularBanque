@@ -1,6 +1,5 @@
 package com.banque.persistance.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +39,9 @@ public class ClientService {
 	
 	public Client saveClient(Client client) {
 		return clientRepository.save(client);
+	}
+
+	public Long countAllClients() {
+		return clientRepository.count();
 	}
 }

@@ -1,0 +1,28 @@
+<app-nav-bar></app-nav-bar>
+<h1>Historique Virement :</h1>
+<label class="block">Client : </label>
+<p-dropdown [options]="clients" emptyMessage="Aucun client trouvé" emptyFilterMessage="Aucun client trouvé" (onChange)="getCompteEmetteur()" [(ngModel)]="selectedClientEmetteur" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+    <ng-template pTemplate="selectedItem" let-selectedOption>
+        <div class="flex align-items-center gap-2">
+            <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
+        </div>
+    </ng-template>
+    <ng-template let-client pTemplate="item">
+        <div class="flex align-items-center gap-2">
+            <div>{{ client?.firstname + ' ' + client?.lastname }}</div>
+        </div>
+    </ng-template>
+</p-dropdown>
+<label class="block">Compte : </label>
+<p-dropdown [options]="comptesEmetteur" emptyMessage="Aucun client selectionné" emptyFilterMessage="Aucun compte trouvé" [(ngModel)]="selectedCompteEmetteur" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Compte">
+    <ng-template pTemplate="selectedItem" let-compte>
+        <div class="flex align-items-center gap-2">
+            <div>{{ compte?.accountName }}</div>
+        </div>
+    </ng-template>
+    <ng-template let-compte pTemplate="item">
+        <div class="flex align-items-center gap-2">
+            <div>{{ compte?.accountName }}</div>
+        </div>
+    </ng-template>
+</p-dropdown>

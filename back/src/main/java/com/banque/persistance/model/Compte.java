@@ -21,7 +21,7 @@ public class Compte {
     private Client client;
     
     @Column(name="balance")
-    private double balance;
+    private Integer balance;
 
     // Getters et Setters
     public Integer getId() {
@@ -48,11 +48,11 @@ public class Compte {
         this.client = client;
     }
 
-    public double getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
     
