@@ -72,7 +72,11 @@ export class NavBarComponent {
                 }
           }, 
           { 
-              label: 'Historique des Virements'
+              label: 'Historique des Virements',
+              routerLink: ['/virements/liste'],
+                routerLinkActiveOptions: {
+                  exact: true
+                }
           } 
         ] 
     } 
