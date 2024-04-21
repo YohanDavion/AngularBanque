@@ -11,6 +11,7 @@ import { CompteModel } from 'src/app/models/compte-model';
 import { VirementModel } from 'src/app/models/virement-model';
 import { BanqueService } from 'src/app/services/banque.service';
 import { Location } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-list-virements-page',
@@ -31,16 +32,16 @@ export class ListVirementsPageComponent {
   comptes: CompteModel[] = [];
   selectedCompte?: CompteModel;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const state = this.location.getState() as any;
-    this.getClients();
-    this.getComptes();
-    this.getVirements();
+    await this.getClients();
+    await this.getComptes();
+    await this.getVirements();
     if(state.compte){
-      this.selectedClient = state.client;
-      this.getComptesByClient(); 
-      this.selectedCompte = state.compte;
-      this.getVirementsByCompte();
+      this.selectedClient = (<ClientModel>state.client);
+      await this.getComptesByClient(); 
+      this.selectedCompte = (<CompteModel>state.compte);
+      await this.getVirementsByCompte();
     }
   }
  
@@ -53,24 +54,33 @@ export class ListVirementsPageComponent {
   }
 
   getClients(){
-    this.banqueService.getAllClients().subscribe(data => {
-      this.clients = data.map((client: ClientModel) => ({
-        ...client,
-        name: client.firstname + ' ' + client.lastname,
-      }));
+    return new Promise(resolve => {
+      this.banqueService.getAllClients().subscribe(data => {
+        this.clients = data.map((client: ClientModel) => ({
+          ...client,
+          name: client.firstname + ' ' + client.lastname,
+        }));
+        resolve(true);
+      });
     });
   }
-
+  
   getComptes(){
+    return new Promise(resolve => {
       this.banqueService.getAllComptes().subscribe(data => {
         this.allComptes = data;
+        resolve(true);
       });
-  } 
+    });
+  }
   
   getVirements(){
-    this.banqueService.getAllVirements().subscribe(data => {
-      this.allVirements = data;
-      this.virements = data;
+    return new Promise(resolve => {
+      this.banqueService.getAllVirements().subscribe(data => {
+        this.allVirements = data;
+        this.virements = data.sort((a: { date: string | number | Date; }, b: { date: string | number | Date; }) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        resolve(true);
+      });
     });
   }
 
@@ -78,9 +88,7 @@ export class ListVirementsPageComponent {
     this.comptes = [];
     this.selectedCompte = undefined;
     if(this.selectedClient){
-      this.banqueService.getCompte(this.selectedClient.id).subscribe(data => {
-        this.comptes = data;
-      });
+      this.comptes = await firstValueFrom(this.banqueService.getCompte(this.selectedClient.id));
     }
   }
 
