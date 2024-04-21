@@ -13,9 +13,7 @@
         </div>
     </ng-template>
 </p-dropdown>
-</p-card>
-
-<p-card styleClass="user-form" class="flex justify-content-center">
+<br><br><br>
 <p-table [value]="comptes" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
@@ -33,7 +31,7 @@
             <td>{{ compte.accountName }}</td>
             <td>{{ compte.balance }}</td>
             <td>
-                <button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="click()"></button>
+                <button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="goToDetail('virements/liste',this.selectedClient!,compte)"></button>
                 <button type="button" style="margin-right: 15px;" severity="danger" pButton icon="pi pi-trash" (click)="deleteCompte(compte)"></button>
             </td>
         </tr>

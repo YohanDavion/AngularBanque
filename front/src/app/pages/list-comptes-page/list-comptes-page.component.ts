@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-comptes-page',
@@ -32,8 +33,8 @@ export class ListComptesPageComponent {
   comptes: CompteModel[] = [];
 
   constructor(private banqueService: BanqueService,
-    private messageService: MessageService
-  ) {};
+    private messageService: MessageService,
+    private router: Router) {};
 
   ngOnInit() {
     this.banqueService.getAllClients().subscribe(data => {
@@ -70,7 +71,7 @@ export class ListComptesPageComponent {
   showError() {
     this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Echec de la suppréssion du Compte' });
 }
-  click(){
-    
+  goToDetail(pageName:string,client:ClientModel,compte:CompteModel){
+  this.router.navigate(['virements/liste'],{state:{client,compte}});
   }
 }

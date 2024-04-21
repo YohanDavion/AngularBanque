@@ -27,6 +27,7 @@ export class DetailClientPageComponent {
 
   ngOnInit() {
     const state = this.location.getState() as any;
+  
     this.clients = state.client;
     this.getCompte();
   }

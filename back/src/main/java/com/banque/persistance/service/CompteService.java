@@ -21,7 +21,7 @@ public class CompteService {
 		return compteRepository.findByClientId(id);
 	}
 	
-	public Iterable<Compte> getComptes(){
+	public Iterable<Compte> getAllComptes(){
 		return compteRepository.findAll();
 	}
 	
