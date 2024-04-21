@@ -47,6 +47,10 @@ export class BanqueService {
     return this.http.get<any>(`${this.apiUrl}/clients/liste/${id}`);
   }
 
+  getAllComptes(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/comptes/liste`);
+  }
+
   getCompte(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/comptes/liste/${id}`);
   }

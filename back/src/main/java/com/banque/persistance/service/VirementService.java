@@ -15,7 +15,6 @@ public class VirementService {
 	private CompteRepository compteRepository;
 
     public Virement saveVirement(Virement virement) {
-        System.out.println(virement);
         compteRepository.findById(virement.getIdCompteEmetteur()).ifPresent(compteEmetteur -> {
             compteEmetteur.setBalance(compteEmetteur.getBalance() - virement.getMontant());
             compteRepository.save(compteEmetteur);

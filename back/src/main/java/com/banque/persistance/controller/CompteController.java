@@ -30,6 +30,11 @@ public class CompteController {
 		return compteService.saveCompte(compte);
 	}
 
+	@GetMapping("/liste")
+    public Iterable<Compte> getAllCompte() {
+        return compteService.getAllComptes();
+    }
+
 	@GetMapping("liste/{id}")
 	public List<Compte> detailCompte(@PathVariable("id") final Integer id) {
 		return compteService.getCompte(id);

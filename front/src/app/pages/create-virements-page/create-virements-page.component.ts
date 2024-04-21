@@ -93,8 +93,9 @@ isFormValid(){
 }
 
   addVirement(){
-    if(this.selectedCompteEmetteur && this.selectedCompteDestinator && this.balance){
-      this.virement = new VirementModel(0,this.selectedCompteEmetteur.id,this.selectedCompteDestinator.id,this.balance,new Date());
+    console.log(this.selectedClientEmetteur?.id);
+    if(this.selectedCompteEmetteur && this.selectedCompteDestinator && this.selectedClientEmetteur && this.selectedClientDestinator && this.balance){
+      this.virement = new VirementModel(0,this.selectedCompteEmetteur.id,this.selectedCompteDestinator.id,this.balance,new Date(),this.selectedClientEmetteur.id,this.selectedClientDestinator.id);
       this.clearForm();
       this.banqueService.createVirement(this.virement).subscribe({
         next: response => {

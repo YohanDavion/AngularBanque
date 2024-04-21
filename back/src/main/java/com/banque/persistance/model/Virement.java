@@ -13,8 +13,14 @@ public class Virement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name="idClient_emetteur")
+    private Integer idClientEmetteur;
+
     @Column(name="idCompte_emetteur")
     private Integer idCompteEmetteur;
+
+    @Column(name="idClient_destinataire")
+    private Integer idClientDestinataire;
 
     @Column(name="idCompte_destinataire")
     private Integer idCompteDestinataire;
@@ -24,7 +30,7 @@ public class Virement {
 
     @CreationTimestamp
     @Column(name = "date")
-    private Date creationDate;
+    private Date date;
 
     
     public Long getId() {
@@ -59,11 +65,27 @@ public class Virement {
         this.montant = montant;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
+    public Integer getIdClientEmetteur() {
+        return idClientEmetteur;
+    }
+
+    public void setIdClientEmetteur(Integer idClientEmetteur) {
+        this.idClientEmetteur = idClientEmetteur;
+    }
+
+    public Integer getIdClientDestinataire() {
+        return idClientDestinataire;
+    }
+
+    public void setIdClientDestinataire(Integer idClientDestinataire) {
+        this.idClientDestinataire = idClientDestinataire;
     }
 }
