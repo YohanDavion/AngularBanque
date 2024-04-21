@@ -34,7 +34,7 @@
     <div style="margin-top: 10px;">
     <p-tag icon="pi pi-user" [style]="{'font-size': '1rem'}" severity="success" value="Destinataire"></p-tag>
     <label class="block">Client : </label>
-    <p-dropdown [options]="clients" emptyFilterMessage="Aucun client trouvé" (onChange)="getCompteDestinator()" [(ngModel)]="selectedClientDestinator" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+    <p-dropdown [options]="clients" emptyMessage="Aucun client trouvé" emptyFilterMessage="Aucun client trouvé" (onChange)="getCompteDestinator()" [(ngModel)]="selectedClientDestinator" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
         <ng-template pTemplate="selectedItem" let-selectedOption>
             <div class="flex align-items-center gap-2">
                 <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>

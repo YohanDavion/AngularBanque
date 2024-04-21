@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<h1>Détail Client : {{clients?.firstname}}  {{clients?.lastname}}</h1>
+<h1>Détail Client : {{client?.firstname}}  {{client?.lastname}}</h1>
 <p-card styleClass="user-form" class="flex justify-content-center">
     <p-table [value]="comptes" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
@@ -18,7 +18,7 @@
                 <td>{{ compte.accountName }}</td>
                 <td>{{ compte.balance }}</td>
                 <td>
-                    <button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="click()"></button>
+                    <button type="button" style="margin-right: 15px;" pButton icon="pi pi-search" (click)="goToDetail('virements/liste',this.client!,compte)"></button>
                     <button type="button" style="margin-right: 15px;" severity="danger" pButton icon="pi pi-trash" (click)="deleteCompte(compte)"></button>
                 </td>
             </tr>

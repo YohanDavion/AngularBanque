@@ -51,8 +51,10 @@ export class ListClientsPageComponent {
 
   getClient(){
     this.banqueService.getAllClients().subscribe(data => {
-      this.clients = data;
-    });
+      this.clients = data.map((client: ClientModel) => ({
+        ...client,
+        name: client.firstname + ' ' + client.lastname,
+      }))});
   }
 
   showSuccess() {

@@ -9,6 +9,7 @@ import { CompteModel } from 'src/app/models/compte-model';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-client-page',
@@ -19,22 +20,23 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './detail-client-page.component.scss'
 })
 export class DetailClientPageComponent {
-  clients: ClientModel | undefined;
-  selectedClient: ClientModel | undefined;
+  client: ClientModel | undefined;
   comptes: CompteModel[] = [];
 
-  constructor(private location: Location,private banqueService: BanqueService,private messageService: MessageService) { }
+  constructor(private location: Location,
+    private banqueService: BanqueService,
+    private messageService: MessageService,
+    private router: Router) { }
 
   ngOnInit() {
     const state = this.location.getState() as any;
-  
-    this.clients = state.client;
+    this.client = state.client;
     this.getCompte();
   }
 
   getCompte(){
-    if(this.clients){
-      this.banqueService.getCompte(this.clients.id).subscribe(data => {
+    if(this.client){
+      this.banqueService.getCompte(this.client.id).subscribe(data => {
         this.comptes = data;
       });
     }
@@ -59,7 +61,7 @@ export class DetailClientPageComponent {
     this.messageService.add({ severity: 'error', summary: 'Echec', detail: 'Echec de la suppréssion du Compte' });
   }
 
-  click(){
-    
-  }
+  goToDetail(pageName:string,client:ClientModel,compte:CompteModel){
+    this.router.navigate(['virements/liste'],{state:{client,compte}});
+    }
 }

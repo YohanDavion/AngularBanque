@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <h1>Création Compte Client :</h1>
 <p-card styleClass="user-form" class="flex justify-content-center">
-    <p-dropdown [options]="clients" emptyFilterMessage="Aucun client trouvé" [(ngModel)]="selectedClient" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
+    <p-dropdown [options]="clients" emptyMessage="Aucun client trouvé" emptyFilterMessage="Aucun client trouvé" [(ngModel)]="selectedClient" [filter]="true" filterBy="name" [showClear]="true" placeholder="Sélectionner un Client">
         <ng-template pTemplate="selectedItem" let-selectedOption>
             <div class="flex align-items-center gap-2">
                 <div>{{ selectedOption?.firstname + ' ' + selectedOption?.lastname }}</div>
